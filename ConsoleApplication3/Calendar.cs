@@ -9,8 +9,6 @@ namespace ConsoleApplication3
 {
     class Note
     {
-
-        // dodać id do klasy?
         public DateTime date { get; set; } // date related to note
         public string text { get; set; } // text of note
     }
@@ -18,12 +16,9 @@ namespace ConsoleApplication3
     {
         public static void Main(string[] args)
         {
-
-            // podzielić 
             var mth = DateTime.Now.Month;
             var yr = DateTime.Now.Year;
             new Calendar().CreateCalendar2(yr, mth);
-
             Console.ReadKey();
         }
     }
@@ -68,7 +63,6 @@ namespace ConsoleApplication3
             List<string> calendar = new List<string>();
             for (int i = 1; i <= daysInMonth; i++)
             {
-                // string.Format
                 var dateForCalendar = DateTime.Parse(year + "-" + month + "-" + i).ToString("dd/MM/yy, dddd");
                 calendar.Add(dateForCalendar);
             }
@@ -89,7 +83,6 @@ namespace ConsoleApplication3
             Console.WriteLine("8 - edit note");
             choice = Console.ReadLine();
 
-            //switch
             if (choice == "2")
             {
                 chosenYear = handleMonth("add", chosenYear, chosenMonth)[0];
@@ -304,13 +297,11 @@ namespace ConsoleApplication3
         {
             List<string> notesLoaded = new List<string>();
             try
-            {   // Open the text file using a stream reader.
                 string line;
 
 
                 using (System.IO.StreamReader file = new System.IO.StreamReader(@"Notes.txt"))
                 {
-                    // Read the stream to a string, and write the string to the console.
                     while ((line = file.ReadLine()) != null)
                     {
                         notesLoaded.Add(line);
@@ -323,7 +314,8 @@ namespace ConsoleApplication3
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
-            try {
+            try
+            {
                 foreach (string noteLoad in notesLoaded)
                 {
                     string[] dateAndNote = noteLoad.Split(new string[] { constSeparator }, StringSplitOptions.None);
@@ -337,7 +329,6 @@ namespace ConsoleApplication3
             }
             catch (Exception)
             {
-
                 //do nothing
             }
         }
@@ -374,8 +365,8 @@ namespace ConsoleApplication3
                     allNotes.RemoveAt(lineNumberInt - 1);
 
                     string line = null;
-                    int line_number = 0;
-                    int line_to_delete = lineNumberInt;
+                    int lineNumberCurrent = 0;
+                    int lineToDelete = lineNumberInt;
 
                     List<string> notesOutput = new List<string>();
 
@@ -383,9 +374,9 @@ namespace ConsoleApplication3
                     {
                         while ((line = reader.ReadLine()) != null)
                         {
-                            line_number++;
+                            lineNumberCurrent++;
 
-                            if (line_number == line_to_delete)
+                            if (lineNumberCurrent == lineToDelete)
                                 continue;
 
                             notesOutput.Add(line);
@@ -401,8 +392,8 @@ namespace ConsoleApplication3
                         writer.Write(notes);
                     }
                 }
-                }
             }
+        }
         public void editNote()
         {
             int rowNumber = 0;
@@ -455,7 +446,6 @@ namespace ConsoleApplication3
                                 notesOutput.Add(fullNoteEdited);
                                 continue;
                             }
-                         
 
                             notesOutput.Add(line);
                         }
@@ -474,10 +464,8 @@ namespace ConsoleApplication3
                 }
             }
         }
-
-
     }
-        }
+}
 
 
 
